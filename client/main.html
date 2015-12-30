@@ -1,12 +1,91 @@
 <html>
     <head>
-        <title></title>
+        <title>Device Viewer</title>
+        <link rel="stylesheet" href="../next/dest/css/next.css">
+        <script src="../next/dest/js/next.js"></script>
+        <script src="Data.js"></script>
+        <script src="Shell.js"></script>
     </head>
     <body>
 
     </body>
 </html>
 
-<template>
+<template name="ApplicationLayout">
+    <nav class="navbar navbar-default">
+       <div class="container-fluid">
+           <div class="navbar-header">
+              <a class="navbar-brand" href="/">Device Viewer</a>
+           </div>
+           <ul class="nav navbar-nav navbar-right">
+              {{> loginButtons align="right"}}
+           </ul>
+       </div>
+    </nav>
+    
+    <div class="container pad-top-margin">
+        {{> yield "content"}}
+    </div>
+</template>
 
+<template name="device_list">
+    <table class="table table-striped">
+           <tr>
+               <th>Something</th>
+               <th>Name</th>
+           </tr>
+            {{#each Devices}}
+                {{> device_list_item}}
+            {{/each}}
+    </table>
+</template>
+
+
+<template name="device_list_item">
+    <tr>
+        <td></td>
+        <td><a href="/device/{{_id}}">{{name}}</a></td>
+    </tr>
+</template>
+
+<template name="deviceview">
+    <h1>{{name}}</h1>
+    
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
+        <li><a data-toggle="tab" href="#config">Configuration</a></li>
+        <li><a data-toggle="tab" href="#map">Map</a></li>
+     </ul>
+
+    <div class="tab-content">
+        <div id="home" class="tab-pane fade in active">
+            <table class="table table-condensed">
+                <tr>
+                    <td>Make</td>
+                    <td>{{make}}</td>
+                </tr>
+                <tr>
+                    <td>Model</td>
+                    <td>{{model}}</td>
+                </tr>
+                <tr>
+                    <td>Serial Number</td>
+                    <td>{{serialNumber}}</td>
+                </tr>
+                <tr>
+                    <td>Status</td>
+                    <td>{{status}}</td>
+                </tr>
+            </table>
+        </div>
+        <div id="config" class="tab-pane fade">
+            <h3>Menu 1</h3>
+            <p>Some content in menu 1.</p>
+        </div>
+        <div id="map" class="tab-pane fade">
+            <h3>Menu 2</h3>
+            <p>Some content in menu 2.</p>
+        </div>
+    </div>
+    
 </template>
